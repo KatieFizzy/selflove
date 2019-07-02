@@ -1,1 +1,1 @@
-web: python sl_backend/code/app.py
+web: gunicorn sl_backend/code/app:app
