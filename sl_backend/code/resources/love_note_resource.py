@@ -35,7 +35,7 @@ class LoveNote(Resource):
 
         data = LoveNote.parser.parse_args()
 
-        love_note = LoveNoteModel( **data) #TODO review **data
+        love_note = LoveNoteModel( **data) #**any arguments being sent in data
 
         try:
             love_note.save_to_db()
