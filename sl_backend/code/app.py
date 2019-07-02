@@ -4,7 +4,7 @@ from flask_jwt import JWT
 
 from security import authenticate, identity
 
-from resources.user_resource import UserRegister, UserList
+from resources.user_resource import UserRegister, UserList, User
 from resources.love_note_resource import LoveNote, LoveNoteList
 
 
@@ -28,10 +28,10 @@ jwt = JWT(app, authenticate, identity)  # /auth
 #authenticate is a function, the returned user becomes identity
 
 
-api.add_resource(LoveNote, '/love_note/<string:name>')
+api.add_resource(LoveNote, '/love_note/<string:title>')
 api.add_resource(LoveNoteList, '/love_notes')
 api.add_resource(UserRegister, '/register')
-api.add_resource(UserRegister, '/user/<string:username>')
+api.add_resource(User, '/user/<string:username>')
 api.add_resource(UserList, '/users')
 
 

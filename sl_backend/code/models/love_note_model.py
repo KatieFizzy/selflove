@@ -7,7 +7,7 @@ class LoveNoteModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80))
     body =  db.Column(db.String(300))
-    date_created = db.Column(db.DateTime)
+    #date_created = db.Column(db.DateTime)
 
     # foreign keys
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -21,10 +21,10 @@ class LoveNoteModel(db.Model):
     '''
 
 
-    def __init__(self, title, body, date_created, user_id):
+    def __init__(self, title, body, user_id = None):
         self.title = title
         self.body = body
-        self.date_created=date_created
+        #self.date_created=date_created
         self.user_id = user_id
 
 

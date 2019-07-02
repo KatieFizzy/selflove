@@ -1,6 +1,5 @@
 
 from flask_restful import Resource, reqparse
-from flask_jwt import jwt_required
 from models.love_note_model import LoveNoteModel
 
 
@@ -23,20 +22,20 @@ class LoveNote(Resource):
                         )
 
 
-    @jwt_required()
+
     def get(self, title):
         love_note = LoveNoteModel.find_by_title(title)
         if love_note:
             return love_note.json()
         return {'message': 'Item not found'}, 404
 
-    def post(self, title, body):
-        if LoveNoteModel.find_by_name(body):
-            return {'message': "An note with body'{}' already exists.".format(body)}, 400
+    def post(self, title):
+        if LoveNoteModel.find_by_title(title):
+            return {'message': "An note with body'{}' already exists.".format(title)}, 400
 
         data = LoveNote.parser.parse_args()
 
-        love_note = LoveNoteModel(title, body, **data) #TODO review **data
+        love_note = LoveNoteModel( **data) #TODO review **data
 
         try:
             love_note.save_to_db()
@@ -49,10 +48,10 @@ class LoveNote(Resource):
         love_note = LoveNoteModel.find_by_title(title)
         if love_note:
             love_note.delete_from_db()
-            return {'message': 'Item deleted.'}
-        return {'message': 'Item not found.'}, 404
+            return {'message': 'Note deleted.'}
+        return {'message': 'Note not found.'}, 404
 
-    def put(self, title, body):
+    def put(self, title):
         data = LoveNote.parser.parse_args()
 
         love_note = LoveNoteModel.find_by_title(title)
@@ -61,7 +60,7 @@ class LoveNote(Resource):
             love_note.title = data['title']
             love_note.body = data['body']
         else:
-            love_note = LoveNoteModel(title, body, **data)
+            love_note = LoveNoteModel(**data)
 
         love_note.save_to_db()
 

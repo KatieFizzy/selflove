@@ -26,13 +26,6 @@ class UserRegister(Resource):
                         help="This field cannot be blank."
                         )
 
-    @jwt_required()
-    def get(self, username):
-        user = UserModel.find_by_username(username)
-        if user:
-            return user.json()
-        return {'message': 'User not found'}, 404
-
     def post(self):
         data = UserRegister.parser.parse_args()
 
@@ -44,6 +37,13 @@ class UserRegister(Resource):
 
         return {"message": "User created successfully."}, 201
 
-    class UserList(Resource):
-        def get(self):
-            return {'users': list(map(lambda x: x.json(), UserModel.query.all()))}
+class UserList(Resource):
+    def get(self):
+        return {'users': list(map(lambda x: x.json(), UserModel.query.all()))}
+
+class User(Resource):
+    def get(self, username):
+        user = UserModel.find_by_username(username)
+        if user:
+            return user.json()
+        return {'message': 'User not found'}, 404

@@ -18,15 +18,14 @@ class UserModel(db.Model):
 
           '''
 
-    def __init__(self, username, password,phone,email, love_note_id = None):
+    def __init__(self, username, password,phone,email):
         self.username = username
         self.password = password
         self.phone = phone
         self.email = email
-        self.love_note_id = love_note_id
 
     def json(self):
-        return {'username': self.username, 'love_notes': [love_note.json() for love_note in self.love_notes.all()]}
+        return {'username': self.username, 'id': self.id, 'love_notes': [love_note.json() for love_note in self.love_notes.all()]}
 
     def save_to_db(self):
         db.session.add(self)
@@ -39,3 +38,7 @@ class UserModel(db.Model):
     @classmethod
     def find_by_id(cls, _id):
         return cls.query.filter_by(id=_id).first()#TODO rewatch explanation
+
+    def delete_from_db(self):
+        db.session.delete(self)
+        db.session.commit()
