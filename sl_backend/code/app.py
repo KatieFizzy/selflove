@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
@@ -12,7 +14,7 @@ from resources.love_note_resource import LoveNote, LoveNoteList
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db') #DATABSE_URL defined in heroku, locally use sqlite
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.secret_key = 'something' #TODO UPDATE ME
