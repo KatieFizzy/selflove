@@ -41,5 +41,5 @@ api.add_resource(UserList, '/users')
 if __name__ == '__main__':
     from db import db #imports at bottom of code, because of circular imports
     db.init_app(app)
-    app.run(port=5000, debug=True)
+    app.run(port=port, debug=True)
 
