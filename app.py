@@ -10,7 +10,7 @@ from resources.user_resource import UserRegister, UserList, User
 from resources.love_note_resource import LoveNote, LoveNoteList
 
 
-port = int(os.environ.get("PORT", 5000))
+
 
 app = Flask(__name__)
 
