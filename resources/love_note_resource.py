@@ -36,13 +36,11 @@ class LoveNote(Resource):
             return love_note.json()
         return {'message': 'Item not found'}, 404
 
-    def post(self, title):
-        if LoveNoteModel.find_by_title(title):
-            return {'message': "An note with body'{}' already exists.".format(title)}, 400
+    def post(self, id):
+        if LoveNoteModel.find_by_id(id):
+            return {'message': "An note with id {}' already exists.".format(id)}, 400
 
         data = LoveNote.parser.parse_args()
-        print("DAATA",data)
-
         love_note = LoveNoteModel( **data) #**any arguments being sent in data
 
         try:
@@ -52,17 +50,17 @@ class LoveNote(Resource):
 
         return love_note.json(), 201
 
-    def delete(self, title):
-        love_note = LoveNoteModel.find_by_title(title)
+    def delete(self, id):
+        love_note = LoveNoteModel.find_by_id(id)
         if love_note:
             love_note.delete_from_db()
             return {'message': 'Note deleted.'}
         return {'message': 'Note not found.'}, 404
 
-    def put(self, title):
+    def put(self, id):
         data = LoveNote.parser.parse_args()
 
-        love_note = LoveNoteModel.find_by_title(title)
+        love_note = LoveNoteModel.find_by_id(id)
 
         if love_note:
             love_note.title = data['title']

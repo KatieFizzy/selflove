@@ -25,7 +25,7 @@ class UserRegister(Resource):
                         required=True,
                         help="This field cannot be blank."
                         )
-    
+
     parser.add_argument('id',
                         type=int,
                         required=True,
@@ -35,7 +35,7 @@ class UserRegister(Resource):
     def post(self):
         data = UserRegister.parser.parse_args()
 
-        if UserModel.find_by_username(data['username']):
+        if UserModel.find_by_id(data['id']):
             return {"message": "A user with that username already exists"}, 400
 
         user = UserModel(data['username'], data['password'], data['phone'], data['email'])
