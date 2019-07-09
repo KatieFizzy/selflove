@@ -27,9 +27,9 @@ class LoveNote(Resource):
                         help="Every item needs a id."
                         )
 
-    def get(self, id):
-        print(id)
-        love_note = LoveNoteModel.find_by_id(id)
+    def get(self, _id):
+        print(_id)
+        love_note = LoveNoteModel.find_by_id(_id)
         if love_note:
             return love_note.json()
         return {'message': 'Item not found'}, 404
