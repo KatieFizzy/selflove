@@ -5,7 +5,7 @@ class LoveNoteModel(db.Model):
     __tablename__ = 'love_notes'
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(80))
+    title = db.Column(db.String(20))
     body =  db.Column(db.String(300))
     #date_created = db.Column(db.DateTime)
 
@@ -29,13 +29,16 @@ class LoveNoteModel(db.Model):
 
 
     def json(self):
-        return {'title': self.title, 'body': self.body}
+        return {'id': self.id,'title': self.title, 'body': self.body}
 
 
 
     @classmethod
     def find_by_title(cls, title):
-        return cls.query.filter_by(title=title).first() #TODO review explanation
+        return cls.query.filter_by(title=title).first()
+
+    def find_by_id(cls, _id):
+        return cls.query.filter_by(id=_id).first()
 
     def save_to_db(self):
         db.session.add(self)

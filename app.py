@@ -30,10 +30,10 @@ jwt = JWT(app, authenticate, identity)  # /auth
 #authenticate is a function, the returned user becomes identity
 
 
-api.add_resource(LoveNote, '/love_note/<string:title>')
-api.add_resource(LoveNoteList, '/love_notes')
+api.add_resource(LoveNote, '/note/<string:id>')
+api.add_resource(LoveNoteList, '/notes')
 api.add_resource(UserRegister, '/register')
-api.add_resource(User, '/user/<string:username>')
+api.add_resource(User, '/user/<string:id>')
 api.add_resource(UserList, '/users')
 
 
