@@ -28,6 +28,7 @@ class LoveNote(Resource):
                         )
 
     def get(self, id):
+        print(id)
         love_note = LoveNoteModel.find_by_id(id)
         if love_note:
             return love_note.json()
