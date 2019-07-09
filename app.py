@@ -30,10 +30,10 @@ jwt = JWT(app, authenticate, identity)  # /auth
 #authenticate is a function, the returned user becomes identity
 
 
-api.add_resource(LoveNote, '/note/<string:title>')
+api.add_resource(LoveNote, '/note/<int:id>')
 api.add_resource(LoveNoteList, '/notes')
 api.add_resource(UserRegister, '/register')
-api.add_resource(User, '/user/<string:id>')
+api.add_resource(User, '/user/<int:id>')
 api.add_resource(UserList, '/users')
 
 
@@ -42,6 +42,6 @@ if __name__ == '__main__':
     from db import db #imports at bottom of code, because of circular imports
     db.init_app(app)
     #app.run(port=port, debug=True)
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 6000))
     app.run(debug=True, host='0.0.0.0', port=port)
 

@@ -21,12 +21,17 @@ class LoveNote(Resource):
                         help="Every item needs a user_id."
                         )
 
+    parser.add_argument('id',
+                        type=int,
+                        required=True,
+                        help="Every item needs a id."
+                        )
 
 
-    def get(self, title):
+    def get(self,id):
         print("SELF", self)
-        print("TITLE",title)
-        love_note = LoveNoteModel.find_by_title(title)
+
+        love_note = LoveNoteModel.find_by_id(id)
         if love_note:
             return love_note.json()
         return {'message': 'Item not found'}, 404
@@ -36,6 +41,7 @@ class LoveNote(Resource):
             return {'message': "An note with body'{}' already exists.".format(title)}, 400
 
         data = LoveNote.parser.parse_args()
+        print("DAATA",data)
 
         love_note = LoveNoteModel( **data) #**any arguments being sent in data
 

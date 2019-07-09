@@ -21,11 +21,12 @@ class LoveNoteModel(db.Model):
     '''
 
 
-    def __init__(self, title, body, user_id = None):
+    def __init__(self, title, body, user_id = None ):
         self.title = title
         self.body = body
         #self.date_created=date_created
         self.user_id = user_id
+
 
 
     def json(self):
@@ -37,6 +38,7 @@ class LoveNoteModel(db.Model):
     def find_by_title(cls, title):
         return cls.query.filter_by(title=title).first()
 
+    @classmethod
     def find_by_id(cls, _id):
         return cls.query.filter_by(id=_id).first()
 

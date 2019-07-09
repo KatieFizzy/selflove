@@ -25,6 +25,12 @@ class UserRegister(Resource):
                         required=True,
                         help="This field cannot be blank."
                         )
+    
+    parser.add_argument('id',
+                        type=int,
+                        required=True,
+                        help="Every item needs a id."
+                        )
 
     def post(self):
         data = UserRegister.parser.parse_args()
@@ -42,8 +48,8 @@ class UserList(Resource):
         return {'users': list(map(lambda x: x.json(), UserModel.query.all()))}
 
 class User(Resource):
-    def get(self, username):
-        user = UserModel.find_by_username(username)
+    def get(self, id):
+        user = UserModel.find_by_id(id)
         if user:
             return user.json()
         return {'message': 'User not found'}, 404
