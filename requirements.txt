@@ -5,3 +5,6 @@ Flask-SQLAlchemy
 Flask-CORS
 gunicorn
 psycopg2
+python-dotenv
+python-jose-cryptodome
+six
