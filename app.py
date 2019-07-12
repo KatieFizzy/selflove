@@ -4,6 +4,7 @@ from functools import wraps
 from jose import jwt
 from flask import Flask
 from flask_restful import Api
+from flask_cors import cross_origin
 #from flask_jwt import JWT
 #from flask_cors import CORS
 
