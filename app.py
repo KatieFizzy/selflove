@@ -114,7 +114,7 @@ def ping():
     return jsonify({"message": "All good. You don't need to be authenticated to call this"})
 
 
-@app.route("api/secured/ping")
+@app.route("/api/secured/ping")
 @cross_origin(headers=['Content-Type', 'Authorization'])
 @cross_origin(headers=['Access-Control-Allow-Origin', '*'])
 @requires_auth
