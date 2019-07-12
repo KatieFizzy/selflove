@@ -122,11 +122,11 @@ def securedPing():
     return jsonify({"message": "All good. You only get this message if you're authenticated"})
 
 
-api.add_resource(LoveNote, 'api/note/<int:id>')
-api.add_resource(LoveNoteList, 'api/notes')
-api.add_resource(UserRegister, 'api/register')
-api.add_resource(User, 'api/user/<int:id>')
-api.add_resource(UserList, 'api/users')
+api.add_resource(LoveNote, '/api/note/<int:id>')
+api.add_resource(LoveNoteList, '/api/notes')
+api.add_resource(UserRegister, '/api/register')
+api.add_resource(User, '/api/user/<int:id>')
+api.add_resource(UserList, '/api/users')
 
 
 
