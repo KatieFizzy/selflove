@@ -108,7 +108,7 @@ api = Api(app)
 #jwt = JWT(app, authenticate, identity)  # /auth
 #authenticate is a function, the returned user becomes identity
 # Controllers API
-@app.route("/ping")
+@app.route("/api/ping")
 @cross_origin(headers=['Content-Type', 'Authorization'])
 def ping():
     return jsonify({"message": "All good. You don't need to be authenticated to call this"})
