@@ -16,9 +16,9 @@ from security import authenticate, identity
 from resources.user_resource import UserRegister, UserList, User
 from resources.love_note_resource import LoveNote, LoveNoteList
 
-load_dotenv(path.join(path.dirname(__file__), '.env'))
-auth0_domain = env['AUTH0_DOMAIN']
-api_audience = env['API_ID']
+
+auth0_domain = os.environ.get('AUTH0_DOMAIN')
+api_audience = os.environ.get('API_ID')
 
 
 app = Flask(__name__)
