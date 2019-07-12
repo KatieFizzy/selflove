@@ -1,17 +1,14 @@
 import os
-from os import environ as env, path
-
-
-from dotenv import load_dotenv
+import urllib
 from functools import wraps
 from jose import jwt
 from flask import Flask
 from flask_restful import Api
 #from flask_jwt import JWT
-from flask_cors import CORS
+#from flask_cors import CORS
 
 
-from security import authenticate, identity
+#from security import authenticate, identity
 
 from resources.user_resource import UserRegister, UserList, User
 from resources.love_note_resource import LoveNote, LoveNoteList
