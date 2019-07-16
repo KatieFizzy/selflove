@@ -2,7 +2,7 @@ import os
 
 from flask import Flask, request, jsonify, _app_ctx_stack
 from flask_restful import Api, Resource
-from .auth import AuthError, requires_auth
+from auth.auth import AuthError, requires_auth
 
 from flask_cors import CORS
 
