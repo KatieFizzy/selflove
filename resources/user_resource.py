@@ -1,6 +1,6 @@
 from flask_restful import Resource, reqparse
 from models.user_model import UserModel
-from ..auth import requires_auth
+from .auth import requires_auth
 
 
 class UserRegister(Resource):
