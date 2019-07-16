@@ -36,7 +36,7 @@ class UserRegister(Resource):
         if UserModel.find_by_auth0_sub(data['auth0_sub']):
             return {"message": "A user with that auth already exists"}, 400
 
-        user = UserModel(data['username'], data['password'], data['phone'], data['email'], data['auth0_sub'] )
+        user = UserModel(data['username'], data['phone'], data['email'], data['auth0_sub'] )
         user.save_to_db()
 
         return {"message": "User created successfully."}, 201
