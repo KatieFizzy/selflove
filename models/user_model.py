@@ -6,9 +6,9 @@ class UserModel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80))
-    password = db.Column(db.String(80))
     phone = db.Column(db.String(12))
     email = db.Column(db.String)
+    auth0_sub = db.Column(db.String)
 
     love_notes = db.relationship('LoveNoteModel', lazy='dynamic')
 
@@ -18,11 +18,11 @@ class UserModel(db.Model):
 
           '''
 
-    def __init__(self, username, password,phone,email):
+    def __init__(self, username,phone,email,auth0_sub):
         self.username = username
-        self.password = password
         self.phone = phone
         self.email = email
+        self.auth0_sub  = auth0_sub
 
     def json(self):
         return {'username': self.username, 'id': self.id, 'love_notes': [love_note.json() for love_note in self.love_notes.all()]}
@@ -38,6 +38,10 @@ class UserModel(db.Model):
     @classmethod
     def find_by_id(cls, _id):
         return cls.query.filter_by(id=_id).first()#TODO rewatch explanation
+
+    @classmethod
+    def auth0_sub(cls, auth0_sub):
+        return cls.query.filter_by(auth0_sub=auth0_sub).first()  # TODO rewatch explanation
 
     def delete_from_db(self):
         db.session.delete(self)

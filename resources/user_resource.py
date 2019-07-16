@@ -1,16 +1,15 @@
 from flask_restful import Resource, reqparse
-from flask_jwt import jwt_required
 from models.user_model import UserModel
+from ..auth import requires_auth
 
 
 class UserRegister(Resource):
+
+    method_decorators = [requires_auth]
+
     parser = reqparse.RequestParser() #can also use with form payloads
+
     parser.add_argument('username',
-                        type=str,
-                        required=True,
-                        help="This field cannot be blank."
-                        )
-    parser.add_argument('password',
                         type=str,
                         required=True,
                         help="This field cannot be blank."
@@ -26,19 +25,18 @@ class UserRegister(Resource):
                         help="This field cannot be blank."
                         )
 
-    parser.add_argument('id',
-                        type=int,
-                        required=True,
-                        help="Every item needs a id."
+    parser.add_argument('profile.sub',
+                         location='headers'
                         )
+
 
     def post(self):
         data = UserRegister.parser.parse_args()
 
-        if UserModel.find_by_id(data['id']):
-            return {"message": "A user with that username already exists"}, 400
+        if UserModel.find_by_auth0_sub(data['auth0_sub']):
+            return {"message": "A user with that auth already exists"}, 400
 
-        user = UserModel(data['username'], data['password'], data['phone'], data['email'])
+        user = UserModel(data['username'], data['password'], data['phone'], data['email'], data['auth0_sub'] )
         user.save_to_db()
 
         return {"message": "User created successfully."}, 201

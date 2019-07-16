@@ -6,3 +6,5 @@ Flask-CORS
 gunicorn
 psycopg2
 python-jose
+python-jose-cryptodome
+
