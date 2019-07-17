@@ -20,7 +20,8 @@ class AuthError(Exception):
 def get_token_auth_header():
     """Obtains the Access Token from the Authorization Header
     """
-    auth = request.headers.get('Authorization', None)
+    auth = request.headers.get('Authorization1', None)
+    print("AUTH_____*****", auth)
     if not auth:
         raise AuthError({
             'code': 'authorization_header_missing',
@@ -28,6 +29,8 @@ def get_token_auth_header():
         }, 401)
 
     parts = auth.split()
+    print("PARTS_____*****", parts)
+
 
     if parts[0].lower() != 'bearer':
         raise AuthError({
@@ -48,6 +51,8 @@ def get_token_auth_header():
         }, 401)
 
     token = parts[1]
+
+    print("TOKEN_____*****", token)
     return token
 
 
