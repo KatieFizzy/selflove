@@ -6,7 +6,7 @@ from jose import jwt
 from urllib.request import urlopen
 
 AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN','dev-hoj9hf7z.auth0.com')
-API_AUDIENCE = os.environ.get('API_ID','https://self-love.herokuapp.com/api')
+API_AUDIENCE = os.environ.get('API_ID','https://self-love.herokuapp.com/')
 ALGORITHMS = ['RS256']
 
 
@@ -20,7 +20,9 @@ class AuthError(Exception):
 def get_token_auth_header():
     """Obtains the Access Token from the Authorization Header
     """
-    auth = request.headers.get('authorization', None)
+    auth =os.environ.get('AUTH_TEST')
+
+    #request.headers.get('authorization', None)
 
     if not auth:
         raise AuthError({
