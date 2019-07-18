@@ -7,4 +7,4 @@ gunicorn
 psycopg2
 python-jose
 python-jose-cryptodome
-
+jwcrypto

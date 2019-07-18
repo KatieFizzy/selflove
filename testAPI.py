@@ -1,0 +1,12 @@
+import http.client
+
+conn = http.client.HTTPConnection("http://127.0.0.1:6000")
+
+headers = { 'authorization': "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1qTTVPRU15UmtJNU5UaEJSVFl3TUVRelJrRkVRelF4TTBFeU5rWTNNemxGTVVVMU5VRkROZyJ9.eyJpc3MiOiJodHRwczovL2Rldi1ob2o5aGY3ei5hdXRoMC5jb20vIiwic3ViIjoidUFvR1hMVUtOSndrU1lIUVFOQWVLTXJlRUFHRmVXb2RAY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vc2VsZi1sb3ZlLmhlcm9rdWFwcC5jb20vYXBpIiwiaWF0IjoxNTYzNDY4MTA5LCJleHAiOjE1NjM1NTQ1MDksImF6cCI6InVBb0dYTFVLTkp3a1NZSFFRTkFlS01yZUVBR0ZlV29kIiwiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIn0.G70OFkObNl8def67T96ExQbtQ94d_40dqUUYoE7Svb6EgWj-E95ptqOG9ukWsWruDqFTswEW1scmbklqYB9tfCRKtXdxBqdaaoedI1ubrJuCoifRKy5pI-dmLl1_43R6qrOF6Wr0uERmac3SQKyYogoVl1M4Fx_Op_2-hBJkXy-DvN6eCil_3nXc5He6E2PC03d8ENzbqom2M7c9lsIGd8N8fkZhIUGjuMz08KDWeJfHPzl6R9bfPh3IXNcePv2hlNBK70Nczb0JN5Tf1agO2e7XTRVkzxnt3LZ4epYfkndjX8nhONWAvcpPNig_LkXNb4dyKQzDWOlujkb560aBWw" }
+
+conn.request("POST", "/api/register", headers=headers)
+
+res = conn.getresponse()
+data = res.read()
+
+print(data.decode("utf-8"))

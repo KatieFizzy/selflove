@@ -1,11 +1,12 @@
 
 from flask_restful import Resource, reqparse
 from models.love_note_model import LoveNoteModel
-#from ..auth import requires_auth
-
+from auth.auth import requires_auth
 
 class LoveNote(Resource):
-    #method_decorators = [requires_auth]
+
+    method_decorators = [requires_auth]
+
     parser = reqparse.RequestParser() #can also use with form payloads
     parser.add_argument('title',
                         type=str,
