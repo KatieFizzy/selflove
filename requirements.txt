@@ -3,6 +3,7 @@ Flask-RESTful
 Flask-JWT
 Flask-SQLAlchemy
 Flask-CORS
+Flask-migrate
 gunicorn
 psycopg2
 python-jose

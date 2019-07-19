@@ -5,8 +5,10 @@ from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
 
-AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN','dev-hoj9hf7z.auth0.com')
-API_AUDIENCE = os.environ.get('API_ID','https://self-love.herokuapp.com/')
+
+
+AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
+API_AUDIENCE = os.environ.get('API_ID')
 ALGORITHMS = ['RS256']
 
 
@@ -20,9 +22,9 @@ class AuthError(Exception):
 def get_token_auth_header():
     """Obtains the Access Token from the Authorization Header
     """
-    auth =os.environ.get('AUTH_TEST')
+    auth = request.headers.get('authorization1', None)
 
-    #request.headers.get('authorization', None)
+
 
     if not auth:
         raise AuthError({
@@ -31,7 +33,6 @@ def get_token_auth_header():
         }, 401)
 
     parts = auth.split()
-
 
 
     if parts[0].lower() != 'bearer':

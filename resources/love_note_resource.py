@@ -5,7 +5,7 @@ from auth.auth import requires_auth
 
 class LoveNote(Resource):
 
-    method_decorators = [requires_auth]
+   # method_decorators = [requires_auth]
 
     parser = reqparse.RequestParser() #can also use with form payloads
     parser.add_argument('title',

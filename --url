@@ -1,4 +1,0 @@
-{
-  "code": "invalid_header", 
-  "description": "Authorization header must start with \"Bearer\"."
-}
