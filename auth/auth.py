@@ -7,8 +7,8 @@ from urllib.request import urlopen
 
 
 
-AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
-API_AUDIENCE = os.environ.get('API_ID')
+AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN' )
+API_AUDIENCE = os.environ.get('API_ID' )
 ALGORITHMS = ['RS256']
 
 

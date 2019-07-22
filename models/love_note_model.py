@@ -1,42 +1,31 @@
 from db import db
-
+from sqlalchemy.sql import func
+import datetime
 
 class LoveNoteModel(db.Model):
     __tablename__ = 'love_notes'
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(20))
     body =  db.Column(db.String(300))
-    #date_created = db.Column(db.DateTime)
+    time_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
+    time_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
     # foreign keys
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship('UserModel')
 
-    '''
-      NOTES to self: 
-      a user has notes
-      the foreign key here is saying, I belong to this user
-
-    '''
-
-
-    def __init__(self, title, body, user_id = None ):
-        self.title = title
+    def __init__(self, body, user_id = None):
         self.body = body
-        #self.date_created=date_created
         self.user_id = user_id
 
 
-
     def json(self):
-        return {'id': self.id,'title': self.title, 'body': self.body}
-
+        return {'id': self.id, 'time_created':str(self.time_created), 'body': self.body}
 
 
     @classmethod
-    def find_by_title(cls, title):
-        return cls.query.filter_by(title=title).first()
+    def find_by_body(cls, body):
+        return cls.query.filter_by(body=body).first()
 
     @classmethod
     def find_by_id(cls, _id):

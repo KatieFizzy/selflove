@@ -12,11 +12,7 @@ class UserModel(db.Model):
 
     love_notes = db.relationship('LoveNoteModel', lazy='dynamic')
 
-    '''   NOTES to self:
-          the above is a back-reference, opposite of foreign key 
-          it allows user to see which notes in the notes table it owns 
 
-          '''
 
     def __init__(self, username,phone,email,sub):
         self.username = username
@@ -41,7 +37,6 @@ class UserModel(db.Model):
 
     @classmethod
     def find_by_sub(cls, sub):
-        print()
         return cls.query.filter_by(sub=sub).first()  # TODO rewatch explanation
 
     def delete_from_db(self):

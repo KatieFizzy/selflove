@@ -7,7 +7,7 @@ class UserRegister(Resource):
 
     method_decorators = [requires_auth]
 
-    parser = reqparse.RequestParser() #can also use with form payloads
+    parser = reqparse.RequestParser()
 
     parser.add_argument('username',
                         type=str,

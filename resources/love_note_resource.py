@@ -5,14 +5,10 @@ from auth.auth import requires_auth
 
 class LoveNote(Resource):
 
-   # method_decorators = [requires_auth]
+    method_decorators = [requires_auth]
 
-    parser = reqparse.RequestParser() #can also use with form payloads
-    parser.add_argument('title',
-                        type=str,
-                        required=True,
-                        help="This field cannot be blank."
-                        )
+    parser = reqparse.RequestParser()
+
     parser.add_argument('body',
                         type=str,
                         required=True,
@@ -24,25 +20,24 @@ class LoveNote(Resource):
                         help="Every item needs a user_id."
                         )
 
-    parser.add_argument('id',
-                        type=int,
-                        required=True,
-                        help="Every item needs a id."
-                        )
 
 
-    def get(self,id):
+    def get(self, id):
         love_note = LoveNoteModel.find_by_id(id)
         if love_note:
             return love_note.json()
         return {'message': 'Item not found'}, 404
 
-    def post(self, id):
-        if LoveNoteModel.find_by_id(id):
-            return {'message': "An note with id {}' already exists.".format(id)}, 400
+    def post(self):
+        data = LoveNote.parser.parse_args()
+
+
+        if LoveNoteModel.find_by_body(data.body):
+            return {'message': "An note with body {}' already exists.".format(data.body)}, 400
 
         data = LoveNote.parser.parse_args()
-        love_note = LoveNoteModel( **data) #**any arguments being sent in data
+
+        love_note = LoveNoteModel( **data)
 
         try:
             love_note.save_to_db()
