@@ -20,7 +20,7 @@ class LoveNoteModel(db.Model):
 
 
     def json(self):
-        return {'id': self.id, 'time_created':str(self.time_created), 'body': self.body}
+        return {'id': self.id, 'user_id':self.user_id, 'time_created':str(self.time_created), 'body': self.body}
 
 
     @classmethod
