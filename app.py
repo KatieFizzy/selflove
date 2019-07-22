@@ -27,9 +27,6 @@ CORS(app)
 api = Api(app)
 migrate = Migrate(app, db)
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
 
 @app.errorhandler(AuthError)
 def handle_auth_error(ex):
