@@ -32,7 +32,7 @@ class LoveNote(Resource):
         data = LoveNote.parser.parse_args()
 
 
-        if LoveNoteModel.find_by_body(data.body):
+        if LoveNoteModel.find_by_body(data.body, data.user_id):
             return {'message': "An note with body {}' already exists.".format(data.body)}, 400
 
         data = LoveNote.parser.parse_args()
@@ -71,6 +71,6 @@ class LoveNote(Resource):
 
 
 class LoveNoteList(Resource):
-    def get(self):
-        return {'love_notes': list(map(lambda x: x.json(), LoveNoteModel.query.all()))}
+    def get(self, user_id):
+        return {'love_notes': list(map(lambda x: x.json(), LoveNoteModel.query.filter_by(user_id=user_id)))}
 

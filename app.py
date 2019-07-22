@@ -17,7 +17,7 @@ app = Flask(__name__)
 
 
 #DATABASE SETUP
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.secret_key = os.environ.get('SECRET_KEY')
@@ -36,7 +36,7 @@ def handle_auth_error(ex):
 
 
 api.add_resource(LoveNote, '/api/note/<int:id>','/api/note/create')
-api.add_resource(LoveNoteList, '/api/notes')
+api.add_resource(LoveNoteList, '/api/notes/<int:user_id>')
 api.add_resource(User, '/api/user/<int:id>','/api/user/delete/<int:id>')
 api.add_resource(UserList, '/api/users')
 api.add_resource(UserRegister, '/api/register')

@@ -24,8 +24,8 @@ class LoveNoteModel(db.Model):
 
 
     @classmethod
-    def find_by_body(cls, body):
-        return cls.query.filter_by(body=body).first()
+    def find_by_body(cls, body, user_id):
+        return cls.query.filter_by(body=body, user_id=user_id).first()
 
     @classmethod
     def find_by_id(cls, _id):

@@ -7,8 +7,8 @@ from urllib.request import urlopen
 
 
 
-AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN' )
-API_AUDIENCE = os.environ.get('API_ID' )
+AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN','dev-hoj9hf7z.auth0.com' )
+API_AUDIENCE = os.environ.get('API_ID','https://self-love.herokuapp.com/api' )
 ALGORITHMS = ['RS256']
 
 
