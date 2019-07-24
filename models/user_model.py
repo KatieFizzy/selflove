@@ -17,7 +17,7 @@ class UserModel(db.Model):
 
 
 
-    def __init__(self, username,phone,email,sub, send_frequency, send_method,sending_status):
+    def __init__(self, username,phone,email,sub, send_frequency=None, send_method=None,sending_status=False):
         self.username = username
         self.phone = phone
         self.email = email

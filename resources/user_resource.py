@@ -24,6 +24,18 @@ class UserRegister(Resource):
                         required=True,
                         help="This field cannot be blank."
                         )
+    parser.add_argument('send_frequency',
+                        type=str,
+                        help="This field cannot be blank."
+                        )
+    parser.add_argument('send_method',
+                        type=str,
+                        help="This field cannot be blank."
+                        )
+    parser.add_argument('sending_status',
+                        type=bool,
+                        help="This field expects True or False"
+                        )
 
     parser.add_argument('sub',
                          location='headers'
@@ -36,7 +48,8 @@ class UserRegister(Resource):
         if UserModel.find_by_sub(data['sub']):
             return {"message": "A user with that auth already exists"}, 400
 
-        user = UserModel(data['username'], data['phone'], data['email'],data['sub'])
+        user = UserModel(**data)
+
         user.save_to_db()
 
         return user.json(), 201
