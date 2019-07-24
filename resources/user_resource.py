@@ -39,10 +39,7 @@ class UserRegister(Resource):
         user = UserModel(data['username'], data['phone'], data['email'],data['sub'])
         user.save_to_db()
 
-        return {"message": "User created successfully."}, 201
-
-
-
+        return user.json(), 201
 
 
 class UserList(Resource):
