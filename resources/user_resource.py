@@ -41,6 +41,16 @@ class UserRegister(Resource):
                          location='headers'
                         )
 
+    def get(self):
+
+        data = UserRegister.parser.parse_args()
+        user = UserModel.find_by_sub(data['sub'])
+
+        if user:
+            return user.json()
+        return {'message': 'User not found'}, 404
+
+
 
     def post(self):
         data = UserRegister.parser.parse_args()

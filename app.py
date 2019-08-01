@@ -39,7 +39,7 @@ api.add_resource(LoveNote, '/api/note/<int:id>','/api/note/create')
 api.add_resource(LoveNoteList, '/api/notes/<int:user_id>')
 api.add_resource(User, '/api/user/<int:id>','/api/user/delete/<int:id>')
 api.add_resource(UserList, '/api/users')
-api.add_resource(UserRegister, '/api/register')
+api.add_resource(UserRegister, '/api/register', '/api/auth')
 
 
 
