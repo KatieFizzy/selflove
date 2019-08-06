@@ -22,7 +22,7 @@ class AuthError(Exception):
 def get_token_auth_header():
     """Obtains the Access Token from the Authorization Header
     """
-    auth = request.headers.get('authorization1', None)
+    auth = request.headers.get('authorization', None)
 
 
 
