@@ -11,17 +11,17 @@ class UserRegister(Resource):
 
     parser.add_argument('username',
                         type=str,
-                        required=True,
+                        #required=True,
                         help="This field cannot be blank."
                         )
     parser.add_argument('phone',
                         type=str,
-                        required=True,
+                        #required=True,
                         help="This field cannot be blank."
                         )
     parser.add_argument('email',
                         type=str,
-                        required=True,
+                        #required=True,
                         help="This field cannot be blank."
                         )
     parser.add_argument('send_frequency',
@@ -41,24 +41,34 @@ class UserRegister(Resource):
                          location='headers'
                         )
 
-    def get(self):
+    #TODO - add put method
 
+    def get(self):
+        print("-- starting -- GET() VERIFY USER___________________________________")
         data = UserRegister.parser.parse_args()
         user = UserModel.find_by_sub(data['sub'])
 
         if user:
-            return user.json()
-        return {'message': 'User not found'}, 404
+            return (False)
+            #FE behavior - sets redux store's signUpUser to false if user exists
+        return (True)
+        #FE behavior - sets redux store's signUpUser to true if user does not exist
+
 
 
 
     def post(self):
+        print("-- starting -- POST() CREATE USER___________________________________")
         data = UserRegister.parser.parse_args()
+        print("-- USER DATA (create) ___________________________________", data,
+              "________________________________")
 
         if UserModel.find_by_sub(data['sub']):
             return {"message": "A user with that auth already exists"}, 400
 
         user = UserModel(**data)
+        print("USER OBJECT (create) ___________________________________", user,
+              "________________________________")
 
         user.save_to_db()
 
@@ -70,14 +80,18 @@ class UserList(Resource):
         return {'users': list(map(lambda x: x.json(), UserModel.query.all()))}
 
 class User(Resource):
-
+    print("-- starting -- GET() FETCH USER___________________________________")
     def get(self, id):
         user = UserModel.find_by_id(id)
+        print("USER OBJECT (fetch) ___________________________________", user,
+              "________________________________")
+
         if user:
             return user.json()
         return {'message': 'User not found'}, 404
 
     def delete(self, id):
+        print("-- starting --DELETE() DELETE USER___________________________________")
         user = UserModel.find_by_id(id)
         if user:
             user.delete_from_db()
