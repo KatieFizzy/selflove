@@ -7,8 +7,8 @@ from urllib.request import urlopen
 
 
 
-AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
-API_AUDIENCE = os.environ.get('API_ID')
+AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN', 'dev-4bobwm61.auth0.com')
+API_AUDIENCE = os.environ.get('API_ID', 'https://self-love.herokuapp.com/api')
 ALGORITHMS = ['RS256']
 
 
@@ -23,7 +23,7 @@ def get_token_auth_header():
     """Obtains the Access Token from the Authorization Header
     """
     auth = request.headers.get('authorization', None)
-
+    print("auth.py", auth)
 
 
     if not auth:
@@ -55,6 +55,7 @@ def get_token_auth_header():
 
     token = parts[1]
 
+
     return token
 
 
@@ -64,6 +65,7 @@ def requires_auth(f):
 
     @wraps(f)
     def decorated(*args, **kwargs):
+
         token = get_token_auth_header()
         jsonurl = urlopen(f'https://{AUTH0_DOMAIN}/.well-known/jwks.json')
         jwks = json.loads(jsonurl.read())
@@ -78,6 +80,7 @@ def requires_auth(f):
                     'n': key['n'],
                     'e': key['e']
                 }
+
         if rsa_key:
             try:
                 payload = jwt.decode(
