@@ -23,7 +23,7 @@ def get_token_auth_header():
     """Obtains the Access Token from the Authorization Header
     """
     auth = request.headers.get('authorization', None)
-    print("auth.py", auth)
+
 
 
     if not auth:
